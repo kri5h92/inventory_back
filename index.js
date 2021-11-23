@@ -1,10 +1,9 @@
+require('dotenv').config()
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-const url =
-  "mongodb+srv://admin:helloworld@cluster0.n95p6.mongodb.net/planner?retryWrites=true&w=majority";
 const router = require("express").Router();
 const foodSchema = new mongoose.Schema({
   food: {
@@ -53,10 +52,10 @@ const showall = async (req, res) => {
 app.get("/show", showOrder);
 app.get("/showall", showall);
 app.post("/post", postOrder);
-
+const PORT = process.env.PORT || 3030
 mongoose
-  .connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(app.listen(7789, () => console.log("Listening to port 7789")))
+  .connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(app.listen(PORT, () => console.log(`Listening to port ${PORT}`)))
   .catch((err) => console.log(err));
 const cors = require("cors");
 app.use(
