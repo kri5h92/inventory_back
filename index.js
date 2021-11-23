@@ -56,5 +56,11 @@ app.post("/post", postOrder);
 
 mongoose
   .connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(app.listen(6000, () => console.log("Listening to port 6000")))
+  .then(app.listen(7789, () => console.log("Listening to port 7789")))
   .catch((err) => console.log(err));
+const cors = require("cors");
+app.use(
+  cors({
+    origin: "*",
+  })
+);
